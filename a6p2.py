@@ -4,7 +4,7 @@
 #
 # CMPUT 331 Student Submission License
 # Version 1.0
-# Copyright 2023 <<Insert your name here>>
+# Copyright 2023 <<Jaspreet Singh Dhami>>
 #
 # Redistribution is forbidden in all circumstances. Use of this software
 # without explicit authorization from the author is prohibited.
@@ -37,10 +37,12 @@ Problem 2
 from sys import flags
 
 def keyScore(mapping: dict, ciphertext: str, frequencies: dict, n: int) -> float:
-    print("Test")
     decipherment = ""
     for c in ciphertext:
-        decipherment += mapping[c]
+        if c.isalpha():
+            decipherment += mapping[c]
+        else:
+            decipherment += c
     
     score =  0
 

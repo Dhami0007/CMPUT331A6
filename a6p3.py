@@ -4,7 +4,7 @@
 #
 # CMPUT 331 Student Submission License
 # Version 1.0
-# Copyright 2023 <<Insert your name here>>
+# Copyright 2023 <<Jaspreet Singh Dhami>>
 #
 # Redistribution is forbidden in all circumstances. Use of this software
 # without explicit authorization from the author is prohibited.
@@ -39,7 +39,6 @@ from a6p2 import keyScore
 
 def bestSuccessor(mapping: dict, ciphertext: str, frequencies: dict, n: int) -> dict:
 
-    print("Test 3")
     # we know there are 325 ways of swap
     prev_mapping = mapping.copy()
     new_mapping = mapping.copy()
@@ -48,19 +47,19 @@ def bestSuccessor(mapping: dict, ciphertext: str, frequencies: dict, n: int) -> 
     score = keyScore(mapping, ciphertext, frequencies, n)
 
     counter = 0
-    chars = "QWERTYUIOPASDFGHJKLZXCVBNM"
+    chars = list(mapping.keys())
     idx1 = 0
     while idx1 < len(chars):
         letter1 = chars[idx1]
         idx2 = idx1 + 1
         while idx2 < len(chars):
-            print(counter)
             letter2 = chars[idx2]
             temp = new_mapping[letter1]
             new_mapping[letter1] = new_mapping[letter2]
             new_mapping[letter2] = temp
             new_score = keyScore(new_mapping, ciphertext, frequencies, n)
             if new_score > score:
+                score = new_score
                 final_mapping = new_mapping
             elif new_score == score:
                 final_mapping = breakKeyScoreTie(mapping, prev_mapping, new_mapping)
@@ -70,7 +69,6 @@ def bestSuccessor(mapping: dict, ciphertext: str, frequencies: dict, n: int) -> 
             counter += 1
         idx1 += 1
     
-    print('__________________________________DONE______________________________________')
     return final_mapping
 
 def breakKeyScoreTie(originalMapping, successorMappingA, successorMappingB):
